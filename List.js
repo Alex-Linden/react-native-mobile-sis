@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 // const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
 // const { styles: s, constants: c } = bootstrapStyleSheet;
 
-export default function List() {
+export default function List({lectures}) {
     return (
       <View style={[styles.listContainer]}>
         <View style={[styles.listHeader]}>
@@ -48,11 +48,7 @@ export default function List() {
           <Text style={[styles.listCell]}>Start Time</Text>
           <Text style={[styles.listCell]}>Title</Text>
         </View>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {lectures.map(l => <Card session={l} />)}
       </View >
 
 

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { StyleSheet, Text, View } from 'react-native';
 // import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 
@@ -35,17 +35,21 @@ const styles = StyleSheet.create({
 // const { styles: s, constants: c } = bootstrapStyleSheet;
 
 
-export default function Card() {
+export default function Card({session}) {
+  console.log('session', session);
+  const start_date = new Date(session.start_at).toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: "numeric"});
+  const start_time = new Date(session.start_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  console.log('start date', start_date);
   return (
-    <View style={[styles.cardContainer]}>
+    <View style={[styles.cardContainer]} key={session.id}>
       <View style={[styles.cardCell]}>
-        <Text>7/11</Text>
+        <Text>{start_date}</Text>
       </View>
       <View style={[styles.cardCell]}>
-        <Text>11 am</Text>
+        <Text>{start_time}</Text>
       </View>
       <View style={[styles.cardCell]}>
-        <Text>Session Title</Text>
+        <Text>{session.title}</Text>
       </View>
     </View>
   );
