@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import SisApi from './api';
-
-import List from './List';
 import axios from 'axios';
+
+import SisApi from './api';
+import List from './List';
 
 // const TOKEN = "d3cb0e452955cfd4f81f2d4fccbade5e3b4753ee";
 const TOKEN = "d3fe9dffb6eed5297aa0cedbf6f052db4d958735";

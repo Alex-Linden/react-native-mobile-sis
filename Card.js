@@ -41,7 +41,7 @@ export default function Card({session}) {
   const start_time = new Date(session.start_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
   console.log('start date', start_date);
   return (
-    <View style={[styles.cardContainer]} key={session.id}>
+    <View style={[styles.cardContainer]}>
       <View style={[styles.cardCell]}>
         <Text>{start_date}</Text>
       </View>

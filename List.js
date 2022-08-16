@@ -48,7 +48,7 @@ export default function List({lectures}) {
           <Text style={[styles.listCell]}>Start Time</Text>
           <Text style={[styles.listCell]}>Title</Text>
         </View>
-          {lectures.map(l => <Card session={l} />)}
+          {lectures.map(l => <Card session={l} key={l.lecture}/>)}
       </View >
 
 
