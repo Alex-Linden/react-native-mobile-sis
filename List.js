@@ -1,47 +1,57 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import BootstrapStyleSheet from 'react-native-bootstrap-styles';
+// import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 
 import Card from "./Card";
 
-const
-  BODY_COLOR = '#000022',
-  TEXT_PRIMARY = '#882288';
+// TODO: Not using bootstrap right now
 
-// custom constants
-const constants = {
-  BODY_COLOR, TEXT_PRIMARY,
-};
+// const
+//   BODY_COLOR = '#000022',
+//   TEXT_PRIMARY = '#882288';
 
-// custom classes
-const classes = {
-  title: {
-    color: 'red',
-  }
-};
+// // custom constants
+// const constants = {
+//   BODY_COLOR, TEXT_PRIMARY,
+// };
+
+// // custom classes
+// const classes = {
+//   title: {
+//     color: 'red',
+//   }
+// };
 
 const styles = StyleSheet.create({
   listContainer: {
+    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between'
   },
   listHeader: {
     flexDirection: 'row',
-  }
+    padding: 10,
+  },
+  listCell: {
+    padding: 10,
+  },
 });
 
-const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
-const { styles: s, constants: c } = bootstrapStyleSheet;
+// TODO: Not using bootstrap right now
+// const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
+// const { styles: s, constants: c } = bootstrapStyleSheet;
 
-class List extends Component {
-  render() {
+export default function List() {
     return (
       <View style={[styles.listContainer]}>
         <View style={[styles.listHeader]}>
-          <Text>Date</Text>
-          <Text>Start Time</Text>
-          <Text>Title</Text>
+          <Text style={[styles.listCell]}>Date</Text>
+          <Text style={[styles.listCell]}>Start Time</Text>
+          <Text style={[styles.listCell]}>Title</Text>
         </View>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
           <Card />
       </View >
 
@@ -77,7 +87,4 @@ class List extends Component {
       //     </View>
       // </View>
     );
-  }
 }
-
-export default List;
