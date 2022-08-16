@@ -15,7 +15,7 @@ class SisApi {
       : {};
 
     try {
-      return (await axios({ url, method, data, headers })).data;
+      return (await axios({ url, method, data, headers }));
     } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.error.message;
