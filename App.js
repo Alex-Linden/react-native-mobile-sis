@@ -6,8 +6,8 @@ import axios from 'axios';
 import SisApi from './api';
 import List from './List';
 
-// const TOKEN = "d3cb0e452955cfd4f81f2d4fccbade5e3b4753ee";
-const TOKEN = "d3fe9dffb6eed5297aa0cedbf6f052db4d958735";
+const TOKEN = "d3cb0e452955cfd4f81f2d4fccbade5e3b4753ee"; //Alex
+// const TOKEN = "d3fe9dffb6eed5297aa0cedbf6f052db4d958735"; //Elise
 
 export default function App() {
   const [lectureSessions, setLecturesSessions] = useState([]);
@@ -27,7 +27,7 @@ export default function App() {
     );
     let lectures = await new Promise.all(lecturesP);
     lectures = lectures.map(l => l.data);
-    
+
     setLecturesSessions(lectures);
     setIsLoading(false);
   };
