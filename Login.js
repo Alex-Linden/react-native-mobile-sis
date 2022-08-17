@@ -11,9 +11,22 @@ import {
   SafeAreaView
 } from "react-native";
 
-export default function Login() {
+export default function Login({loginUser}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  
+  /** Handle form submit:
+   *
+   * Calls login func prop and, if not successful, sets errors.
+   */
+  async function handleSubmit() {
+    console.log('handleSubmit');
+    try {
+      await loginUser({username, password});
+    } catch (err) {
+      console.log('Failed login', err);
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -26,6 +39,7 @@ export default function Login() {
           style={styles.TextInput}
           placeholder="Username"
           placeholderTextColor="#003f5c"
+          autoCapitalize="none"
           onChangeText={(username) => setUsername(username)}
         />
       </View>
@@ -35,17 +49,19 @@ export default function Login() {
           style={styles.TextInput}
           placeholder="Password."
           placeholderTextColor="#003f5c"
-          secureTextEntry={true}
+          autoCapitalize="none"
+          // secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
       </View>
 
-      <TouchableOpacity>
+      {/* TODO: Make button open browser with Rithm page */}
+      {/* <TouchableOpacity>
         <Text style={styles.forgot_button}>Forgot Password?</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
+        <Text style={styles.loginText} onPress={handleSubmit}>LOGIN</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

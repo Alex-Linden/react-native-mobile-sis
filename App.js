@@ -8,12 +8,12 @@ import Login from './Login';
 import SisApi from './api';
 import List from './List';
 
-const TOKEN = "d3cb0e452955cfd4f81f2d4fccbade5e3b4753ee"; //Alex
-// const TOKEN = "d3fe9dffb6eed5297aa0cedbf6f052db4d958735"; //Elise
+const TOKEN = process.env.TOKEN
 
 export default function App() {
   const [cohortItems, setCohortItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState('');
 
 
   const fetchCohortItems = async () => {
@@ -28,6 +28,21 @@ export default function App() {
     setCohortItems(apiCohortItems.data);
     setIsLoading(false);
   };
+  
+  /** Login function makes API call
+   *
+   *  Takes:
+   *  - form data from LoginForm
+   *
+   *  Sets
+   *  - token
+   *
+   */
+  async function loginUser(userData) {
+    console.log('loginUser');
+    const token = await SisApi.logIn(userData);
+    setToken(token);
+  }
 
   /** Calls SisApi to get all lecture sessions*/
   useEffect(
@@ -36,22 +51,20 @@ export default function App() {
     },
     []
   );
+  
   console.log("cohortItems", cohortItems);
+  
+  /** Load login page if not logged in */
   return(
     <View style={styles.loginContainer}>
-      <Login />
+      <Login loginUser={loginUser}/>
     </View>
   );
 
   if(isLoading){
     return (
-      <View>
-        <Image
-        // style={styles.tinyLogo}
-        source={ require('./assets/rithm-simple.svg')
-        }
-      />
-      </View>
+      <SafeAreaView style={styles.loadingContainer}>
+      </SafeAreaView>
     )
   }
   return (
@@ -73,6 +86,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'stretch',
+    justifyContent: 'center',
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: 'rgb(228, 107, 102)',
+    alignItems: 'center',
     justifyContent: 'center',
   },
 });

@@ -31,17 +31,22 @@ class SisApi {
     return res.company;
   }
 
-  static async getToken() {
-    console.log("getToken")
+  static async logIn({username, password}) {
+    console.log("getToken", username, password);
+    const data = {
+      "username": username,
+      "password": password
+    };
     let res = await axios.post(
       "http://localhost:8000/api/-token/",
+      data,
       {
-        data: {
-          "username": "admin",
-          "password": "password"
+        headers: {
+          "Content-Type": "application/json",
         }
       }
     );
+    console.log('res.data', res.data);
     this.token = res.data.token
   }
 
