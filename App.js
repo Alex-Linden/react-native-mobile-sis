@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -8,7 +8,7 @@ import Login from './Login';
 import SisApi from './api';
 import List from './List';
 
-const TOKEN = process.env.TOKEN
+const TOKEN = process.env.TOKEN;
 
 export default function App() {
   const [cohortItems, setCohortItems] = useState([]);
@@ -18,17 +18,17 @@ export default function App() {
 
   const fetchCohortItems = async () => {
     console.log("fetchCohortItems");
-    const apiCohortItems = await axios.get(
-      "http://localhost:8000/api/cohortitems/",
-      { headers: { Authorization: `Token ${TOKEN}` } }
-    );
+    // const apiCohortItems = await axios.get(
+    //   "http://localhost:8000/api/cohortitems/",
+    //   { headers: { Authorization: `Token ${TOKEN}` } }
+    // );
 
-    console.log(apiCohortItems.data);
-
-    setCohortItems(apiCohortItems.data);
+    // console.log(apiCohortItems.data);
+    const apiCohortItems = await SisApi.getCohortItems()
+    setCohortItems(apiCohortItems);
     setIsLoading(false);
   };
-  
+
   /** Login function makes API call
    *
    *  Takes:
@@ -47,29 +47,31 @@ export default function App() {
   /** Calls SisApi to get all lecture sessions*/
   useEffect(
     function fetchCohortItemsWhenMounted() {
-      fetchCohortItems();
+      if(token) fetchCohortItems();
     },
-    []
-  );
-  
-  console.log("cohortItems", cohortItems);
-  
-  /** Load login page if not logged in */
-  return(
-    <View style={styles.loginContainer}>
-      <Login loginUser={loginUser}/>
-    </View>
+    [token]
   );
 
-  if(isLoading){
+  console.log("cohortItems", cohortItems);
+
+  /** Load login page if not logged in */
+  if (!token) {
+    return (
+      <View style={styles.loginContainer}>
+        <Login loginUser={loginUser} />
+      </View>
+    );
+  }
+
+  if (isLoading) {
     return (
       <SafeAreaView style={styles.loadingContainer}>
       </SafeAreaView>
-    )
+    );
   }
   return (
     <View style={styles.container}>
-      <List cohortItems={cohortItems}/>
+      <List cohortItems={cohortItems} />
       <StatusBar style="auto" />
     </View>
   );

@@ -31,7 +31,15 @@ class SisApi {
     return res.company;
   }
 
-  static async logIn({username, password}) {
+  static async getCohortItems() {
+    const apiCohortItems = await axios.get(
+      "http://localhost:8000/api/cohortitems/",
+      { headers: { Authorization: `Token ${this.token}` } }
+    );
+    return apiCohortItems.data;
+  }
+
+  static async logIn({ username, password }) {
     console.log("getToken", username, password);
     const data = {
       "username": username,
@@ -47,7 +55,8 @@ class SisApi {
       }
     );
     console.log('res.data', res.data);
-    this.token = res.data.token
+    this.token = res.data.token;
+    return this.token;
   }
 
 }
