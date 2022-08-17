@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = "http://localhost:8000/api";
 
 class SisApi {
-  static token = "d3cb0e452955cfd4f81f2d4fccbade5e3b4753ee";
+  static token;
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
@@ -29,6 +29,20 @@ class SisApi {
   static async getLectureSessions() {
     let res = await this.request(`lecturesessions/`);
     return res.company;
+  }
+
+  static async getToken() {
+    console.log("getToken")
+    let res = await axios.post(
+      "http://localhost:8000/api/-token/",
+      {
+        data: {
+          "username": "admin",
+          "password": "password"
+        }
+      }
+    );
+    this.token = res.data.token
   }
 
 }

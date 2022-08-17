@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Login from './Login';
 import SisApi from './api';
 import List from './List';
 
@@ -19,8 +20,8 @@ export default function App() {
     console.log("fetchCohortItems");
     const apiCohortItems = await axios.get(
       "http://localhost:8000/api/cohortitems/",
-      { headers: { Authorization: `Token ${TOKEN}` } })
-    ;
+      { headers: { Authorization: `Token ${TOKEN}` } }
+    );
 
     console.log(apiCohortItems.data);
 
@@ -36,6 +37,12 @@ export default function App() {
     []
   );
   console.log("cohortItems", cohortItems);
+  return(
+    <View style={styles.loginContainer}>
+      <Login />
+    </View>
+  );
+
   if(isLoading){
     return (
       <View>
@@ -60,6 +67,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loginContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
 });
