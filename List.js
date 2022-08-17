@@ -28,7 +28,7 @@ import Card from "./Card";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop : StatusBar.currentHeight || 0,
+    marginTop: StatusBar.currentHeight || 0,
   },
   listHeader: {
     flexDirection: 'row',
@@ -49,60 +49,67 @@ const styles = StyleSheet.create({
 // const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
 // const { styles: s, constants: c } = bootstrapStyleSheet;
 
-export default function List({cohortItems}) {
+export default function List({ cohortItems, navigation }) {
 
-    function renderItem({item}){
-      return (
-        <View >
-          <Card style={[styles.card]} session={item} />
-        </View>
-      )
-    }
-
+  function renderItem({ item }) {
     return (
-      <SafeAreaView style={[styles.container]}>
-        <View style={[styles.listHeader]}>
-          <Text style={[styles.listCell]}>Date</Text>
-          <Text style={[styles.listCell]}>Start Time</Text>
-          <Text style={[styles.listCell]}>Title</Text>
-        </View>
+      <View >
+        <Card style={[styles.card]} session={item} navigation={navigation} />
+      </View>
+    );
+  }
+
+  return (
+    <SafeAreaView style={[styles.container]}>
+      <DataTable>
+        {/* <DataTable.Header style={[styles.listHeader]}>
+          <DataTable.Title style={[styles.listCell]}>Date</DataTable.Title>
+          <DataTable.Title style={[styles.listCell]}>Start Time</DataTable.Title>
+          <DataTable.Title style={[styles.listCell]}>Title</DataTable.Title>
+        </DataTable.Header> */}
+        <DataTable.Header>
+          <DataTable.Title>Date</DataTable.Title>
+          <DataTable.Title>Start Time</DataTable.Title>
+          <DataTable.Title>Title</DataTable.Title>
+        </DataTable.Header>
         <FlatList
           data={cohortItems}
           renderItem={renderItem}
           keyExtractor={item => `${item.id}-${item.type}`}
-          />
-      </SafeAreaView >
+        />
+      </DataTable>
+    </SafeAreaView >
 
 
-      // <View style={[s.body]}>
-      //   <View style={[s.table]}>
-      //     <View style={[s.thead]}>
-      //       <View style={[s.tr]}>
-      //         <View style={[s.th]}>
-      //           <Text>Date</Text>
-      //         </View>
-      //         <View style={[s.th]}>
-      //           <Text>Start Time</Text>
-      //         </View>
-      //         <View style={[s.th]}>
-      //           <Text>Title</Text>
-      //         </View>
-      //       </View>
-      //     </View>
-      //     <View style={[s.tbody]}>
-      //       <Card />
-      //     </View>
-      //   </View>
-      // </View>
+    // <View style={[s.body]}>
+    //   <View style={[s.table]}>
+    //     <View style={[s.thead]}>
+    //       <View style={[s.tr]}>
+    //         <View style={[s.th]}>
+    //           <Text>Date</Text>
+    //         </View>
+    //         <View style={[s.th]}>
+    //           <Text>Start Time</Text>
+    //         </View>
+    //         <View style={[s.th]}>
+    //           <Text>Title</Text>
+    //         </View>
+    //       </View>
+    //     </View>
+    //     <View style={[s.tbody]}>
+    //       <Card />
+    //     </View>
+    //   </View>
+    // </View>
 
 
-      // <View style={[s.body]}>
-      //           <Text>Date</Text>
-      //           <Text>Start Time</Text>
-      //           <Text>Title</Text>
-      //     <View style={[s.tbody]}>
-      //       <Card />
-      //     </View>
-      // </View>
-    );
+    // <View style={[s.body]}>
+    //           <Text>Date</Text>
+    //           <Text>Start Time</Text>
+    //           <Text>Title</Text>
+    //     <View style={[s.tbody]}>
+    //       <Card />
+    //     </View>
+    // </View>
+  );
 }

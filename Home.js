@@ -9,7 +9,7 @@ import SisApi from './api';
 import List from './List';
 
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [cohortItems, setCohortItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,7 +43,7 @@ export default function Home() {
   /**displays list of cohort items */
   return (
     <View style={styles.container}>
-      <List cohortItems={cohortItems} />
+      <List cohortItems={cohortItems} navigation={navigation} />
       <StatusBar style="auto" />
     </View>
   );

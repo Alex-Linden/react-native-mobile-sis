@@ -60,3 +60,21 @@ export default function ItemDetail() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  cardContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  cardCell: {
+    padding: 10,
+  },
+  cardTitle: {
+    fontWeight: 'bold',
+    color: '#00449e',
+  },
+  cardType: {
+    color: '#666',
+    size: '0.875em',
+  }
+});

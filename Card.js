@@ -1,5 +1,6 @@
 import * as React from "react";
-import { StyleSheet, SafeAreaView, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View, TouchableHighlight } from 'react-native';
+import { DataTable } from 'react-native-paper';
 // import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 
 // TODO: Not using bootstrap right now
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
 // const { styles: s, constants: c } = bootstrapStyleSheet;
 
 
-export default function Card({session}) {
+export default function Card({ session, navigation }) {
 
   const startDate = new Date(session.start_at)
     .toLocaleDateString(undefined,
@@ -63,24 +64,39 @@ export default function Card({session}) {
     .toLocaleTimeString([],
       {
         hour: '2-digit',
-        minute:'2-digit',
+        minute: '2-digit',
       }
     );
   const itemType = TYPES[session.type];
 
   return (
-    <View style={[styles.cardContainer]}
-    onPress={() => navigation.navigate('ItemDetail')}>
-      <View style={[styles.cardCell]}>
-        <Text>{startDate}</Text>
-      </View>
-      <View style={[styles.cardCell]}>
-        <Text>{startTime}</Text>
-      </View>
-      <View style={[styles.cardCell]}>
-        <Text style={[styles.cardTitle]}>{session.title}</Text>
-        <Text style={[styles.cardType]}>({itemType})</Text>
-      </View>
+    <View style={styles.cardContainer}>
+      {/* // onPress={() => navigation.navigate('ItemDetail')} */}
+      {/* <DataTable.Cell>
+        {startDate}
+      </DataTable.Cell>
+      <DataTable.Cell >
+        {startTime}
+      </DataTable.Cell>
+      <DataTable.Cell >
+        {session.title}
+        {itemType}
+      </DataTable.Cell> */}
+      <TouchableHighlight
+        onPress={() => navigation.navigate('ItemDetail')}>
+        <View>
+          <View style={[styles.cardCell]}>
+            <Text>{startDate}</Text>
+          </View>
+          <View style={[styles.cardCell]}>
+            <Text>{startTime}</Text>
+          </View>
+          <View style={[styles.cardCell]}>
+            <Text style={[styles.cardTitle]}>{session.title}</Text>
+            <Text style={[styles.cardType]}>({itemType})</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
     </View>
   );
 }
