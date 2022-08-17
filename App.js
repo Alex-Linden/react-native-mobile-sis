@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -7,8 +7,8 @@ import axios from 'axios';
 import SisApi from './api';
 import List from './List';
 
-// const TOKEN = "d3cb0e452955cfd4f81f2d4fccbade5e3b4753ee"; //Alex
-const TOKEN = "d3fe9dffb6eed5297aa0cedbf6f052db4d958735"; //Elise
+const TOKEN = "d3cb0e452955cfd4f81f2d4fccbade5e3b4753ee"; //Alex
+// const TOKEN = "d3fe9dffb6eed5297aa0cedbf6f052db4d958735"; //Elise
 
 export default function App() {
   const [cohortItems, setCohortItems] = useState([]);
@@ -36,10 +36,19 @@ export default function App() {
     []
   );
   console.log("cohortItems", cohortItems);
-
+  if(isLoading){
+    return (
+      <View>
+        <Image
+        // style={styles.tinyLogo}
+        source={ require('./assets/rithm-simple.svg')
+        }
+      />
+      </View>
+    )
+  }
   return (
     <View style={styles.container}>
-      <Text>hello</Text>
       <List cohortItems={cohortItems}/>
       <StatusBar style="auto" />
     </View>

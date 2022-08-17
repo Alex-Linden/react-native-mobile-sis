@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { SafeAreaView, FlatList, View, Text, StyleSheet } from 'react-native';
 // import BootstrapStyleSheet from 'react-native-bootstrap-styles';
-import 'react-native-tableview';
+// import 'react-native-tableview';
 
 import Card from "./Card";
 
@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
 // const { styles: s, constants: c } = bootstrapStyleSheet;
 
 export default function List({cohortItems}) {
-    
+
     function renderItem({item}){
       return (
         <View >
           <Card style={[styles.card]} session={item} />
-        </View> 
+        </View>
       )
     }
 
@@ -65,10 +65,10 @@ export default function List({cohortItems}) {
           <Text style={[styles.listCell]}>Start Time</Text>
           <Text style={[styles.listCell]}>Title</Text>
         </View>
-        <FlatList 
+        <FlatList
           data={cohortItems}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => `${item.id}-${item.type}`}
           />
       </SafeAreaView >
 
