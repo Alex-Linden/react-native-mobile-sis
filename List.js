@@ -1,5 +1,6 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, FlatList, View, Text, StyleSheet } from 'react-native';
 // import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 
 import Card from "./Card";
@@ -23,9 +24,9 @@ import Card from "./Card";
 // };
 
 const styles = StyleSheet.create({
-  listContainer: {
+  container: {
     flex: 1,
-    flexDirection: 'column',
+    marginTop : StatusBar.currentHeight || 0,
   },
   listHeader: {
     flexDirection: 'row',
@@ -34,22 +35,41 @@ const styles = StyleSheet.create({
   listCell: {
     padding: 10,
   },
+  card: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  }
 });
 
 // TODO: Not using bootstrap right now
 // const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
 // const { styles: s, constants: c } = bootstrapStyleSheet;
 
-export default function List({lectures}) {
+export default function List({cohortItems}) {
+    
+    function renderItem({item}){
+      return (
+        <View >
+          <Card style={[styles.card]} session={item} />
+        </View> 
+      )
+    }
+
     return (
-      <View style={[styles.listContainer]}>
+      <SafeAreaView style={[styles.container]}>
         <View style={[styles.listHeader]}>
           <Text style={[styles.listCell]}>Date</Text>
           <Text style={[styles.listCell]}>Start Time</Text>
           <Text style={[styles.listCell]}>Title</Text>
         </View>
-          {lectures.map(l => <Card session={l} key={l.lecture}/>)}
-      </View >
+        <FlatList 
+          data={cohortItems}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          />
+      </SafeAreaView >
 
 
       // <View style={[s.body]}>

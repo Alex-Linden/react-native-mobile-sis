@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View } from 'react-native';
 // import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 
 // TODO: Not using bootstrap right now
@@ -36,10 +36,23 @@ const styles = StyleSheet.create({
 
 
 export default function Card({session}) {
-  console.log('session', session);
-  const start_date = new Date(session.start_at).toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: "numeric"});
-  const start_time = new Date(session.start_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-  console.log('start date', start_date);
+
+  const start_date = new Date(session.start_at)
+    .toLocaleDateString(undefined, 
+      {
+        weekday: 'short', 
+        month: 'numeric', 
+        day: "numeric",
+      }
+    );
+  const start_time = new Date(session.start_at)
+    .toLocaleTimeString([], 
+      {
+        hour: '2-digit', 
+        minute:'2-digit',
+      }
+    );
+
   return (
     <View style={[styles.cardContainer]}>
       <View style={[styles.cardCell]}>
