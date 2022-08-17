@@ -14,7 +14,7 @@ import {
 export default function Login({loginUser}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  
+
   /** Handle form submit:
    *
    * Calls login func prop and, if not successful, sets errors.
@@ -31,7 +31,7 @@ export default function Login({loginUser}) {
   return (
     <SafeAreaView style={styles.container}>
       <Image style={styles.image}
-      source = {require("./assets/splash.png")}/>
+      source = {require("./assets/rithm-r-black.jpeg")}/>
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
@@ -47,10 +47,10 @@ export default function Login({loginUser}) {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Password."
+          placeholder="Password"
           placeholderTextColor="#003f5c"
           autoCapitalize="none"
-          // secureTextEntry={true}
+          secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
       </View>
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
 
   image: {
     marginBottom: 40,
-    height: 50,
+    height: 150,
+    resizeMode: 'contain',
   },
 
   inputView: {
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
   },
 
   loginBtn: {
-    width: "80%",
+    width: "40%",
     borderRadius: 25,
     height: 50,
     alignItems: "center",

@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   }
 });
 
-// 
+//
 // const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
 // const { styles: s, constants: c } = bootstrapStyleSheet;
 
@@ -52,24 +52,25 @@ const styles = StyleSheet.create({
 export default function Card({session}) {
 
   const startDate = new Date(session.start_at)
-    .toLocaleDateString(undefined, 
+    .toLocaleDateString(undefined,
       {
-        weekday: 'short', 
-        month: 'numeric', 
+        weekday: 'short',
+        month: 'numeric',
         day: "numeric",
       }
     );
   const startTime = new Date(session.start_at)
-    .toLocaleTimeString([], 
+    .toLocaleTimeString([],
       {
-        hour: '2-digit', 
+        hour: '2-digit',
         minute:'2-digit',
       }
     );
   const itemType = TYPES[session.type];
-  
+
   return (
-    <View style={[styles.cardContainer]}>
+    <View style={[styles.cardContainer]}
+    onPress={() => navigation.navigate('ItemDetail')}>
       <View style={[styles.cardCell]}>
         <Text>{startDate}</Text>
       </View>

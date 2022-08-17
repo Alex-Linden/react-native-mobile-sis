@@ -2,32 +2,28 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from './Login';
 import SisApi from './api';
-import List from './List';
+import Home from './Home';
+import ItemDetail from './ItemDetail';
 
-const TOKEN = process.env.TOKEN;
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [cohortItems, setCohortItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [cohortItems, setCohortItems] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState('');
 
 
-  const fetchCohortItems = async () => {
-    console.log("fetchCohortItems");
-    // const apiCohortItems = await axios.get(
-    //   "http://localhost:8000/api/cohortitems/",
-    //   { headers: { Authorization: `Token ${TOKEN}` } }
-    // );
-
-    // console.log(apiCohortItems.data);
-    const apiCohortItems = await SisApi.getCohortItems()
-    setCohortItems(apiCohortItems);
-    setIsLoading(false);
-  };
+  // const fetchCohortItems = async () => {
+  //   console.log("fetchCohortItems");
+  //   const apiCohortItems = await SisApi.getCohortItems();
+  //   setCohortItems(apiCohortItems);
+  //   setIsLoading(false);
+  // };
 
   /** Login function makes API call
    *
@@ -44,36 +40,42 @@ export default function App() {
     setToken(token);
   }
 
-  /** Calls SisApi to get all lecture sessions*/
-  useEffect(
-    function fetchCohortItemsWhenMounted() {
-      if(token) fetchCohortItems();
-    },
-    [token]
-  );
+  // /** Calls SisApi to get all lecture sessions*/
+  // useEffect(
+  //   function fetchCohortItemsWhenMounted() {
+  //     if (token) fetchCohortItems();
+  //   },
+  //   [token]
+  // );
 
-  console.log("cohortItems", cohortItems);
+  // console.log("cohortItems", cohortItems);
 
-  /** Load login page if not logged in */
-  if (!token) {
-    return (
-      <View style={styles.loginContainer}>
-        <Login loginUser={loginUser} />
-      </View>
-    );
-  }
+  // /** Load login page if not logged in */
+  // if (!token) {
+  //   return (
+  //     <NavigationContainer>
+  //       <View style={styles.loginContainer}>
+  //         <Login loginUser={loginUser} />
+  //       </View>
+  //     </NavigationContainer>
+  //   );
+  // }
 
-  if (isLoading) {
-    return (
-      <SafeAreaView style={styles.loadingContainer}>
-      </SafeAreaView>
-    );
-  }
+  /**displays list of cohort items */
   return (
-    <View style={styles.container}>
-      <List cohortItems={cohortItems} />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      {token
+        ? (<Stack.Navigator initialRouteName='Home'>
+            <Stack.Screen name='Home' component={Home} />
+            <Stack.Screen name='ItemDetail' component={ItemDetail} />
+          </Stack.Navigator>)
+        : (<Stack.Navigator initialRouteName='Login'>
+            <Stack.Screen name='Login'>
+              {(props) => <Login {...props} loginUser={loginUser} />}
+            </Stack.Screen>
+          </Stack.Navigator>)
+      }
+    </NavigationContainer >
   );
 }
 
@@ -84,16 +86,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   loginContainer: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'stretch',
     justifyContent: 'center',
   },
+
   loadingContainer: {
     flex: 1,
-    backgroundColor: 'rgb(228, 107, 102)',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  image: {
+    height: 200,
+    resizeMode: 'contain',
   },
 });
