@@ -19,6 +19,12 @@ import { StyleSheet, SafeAreaView, Text, View } from 'react-native';
 //     color: 'red',
 //   }
 // };
+const TYPES = {
+  'L': 'Lecture',
+  'E': 'Exercise',
+  'V': 'Event',
+  'A': 'Assessment',
+};
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -27,6 +33,14 @@ const styles = StyleSheet.create({
   },
   cardCell: {
     padding: 10,
+  },
+  cardTitle: {
+    fontWeight: 'bold',
+    color: '#00449e',
+  },
+  cardType: {
+    color: '#666',
+    size: '0.875em',
   }
 });
 
@@ -37,7 +51,7 @@ const styles = StyleSheet.create({
 
 export default function Card({session}) {
 
-  const start_date = new Date(session.start_at)
+  const startDate = new Date(session.start_at)
     .toLocaleDateString(undefined, 
       {
         weekday: 'short', 
@@ -45,24 +59,26 @@ export default function Card({session}) {
         day: "numeric",
       }
     );
-  const start_time = new Date(session.start_at)
+  const startTime = new Date(session.start_at)
     .toLocaleTimeString([], 
       {
         hour: '2-digit', 
         minute:'2-digit',
       }
     );
-
+  const itemType = TYPES[session.type];
+  
   return (
     <View style={[styles.cardContainer]}>
       <View style={[styles.cardCell]}>
-        <Text>{start_date}</Text>
+        <Text>{startDate}</Text>
       </View>
       <View style={[styles.cardCell]}>
-        <Text>{start_time}</Text>
+        <Text>{startTime}</Text>
       </View>
       <View style={[styles.cardCell]}>
-        <Text>{session.title}</Text>
+        <Text style={[styles.cardTitle]}>{session.title}</Text>
+        <Text style={[styles.cardType]}>({itemType})</Text>
       </View>
     </View>
   );

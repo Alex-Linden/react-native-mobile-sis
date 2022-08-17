@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { SafeAreaView, FlatList, View, Text, StyleSheet } from 'react-native';
 // import BootstrapStyleSheet from 'react-native-bootstrap-styles';
+import 'react-native-tableview';
 
 import Card from "./Card";
 

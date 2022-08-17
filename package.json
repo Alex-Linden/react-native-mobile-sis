@@ -16,7 +16,8 @@
     "react-native": "0.69.4",
     "react-native-axios": "^0.17.1",
     "react-native-bootstrap-styles": "^4.5.0-r",
-    "react-native-easy-grid": "^0.2.2"
+    "react-native-easy-grid": "^0.2.2",
+    "react-native-tableview": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
