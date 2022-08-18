@@ -7,8 +7,8 @@ import {
 } from "react-native";
 import { Card, Title, Paragraph, Avatar, ActivityIndicator } from 'react-native-paper';
 
-import SisApi from "./api";
-import { TYPES, COLORS } from "./vocabs";
+import SisApi from "../api";
+import { TYPES, COLORS } from "../vocabs";
 
 
 /**Displays detailed information for one item in a cohort,

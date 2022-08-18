@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import Item from "./Item";
-import { COLORS } from "./vocabs";
+import { COLORS } from "../vocabs";
 
 
 /** Show list of items for a cohort

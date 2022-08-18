@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-import { COLORS, TYPES } from "./vocabs";
+import { COLORS, TYPES } from "../vocabs";
 
 
 /** Item displays basic information for an item to be displayed in list

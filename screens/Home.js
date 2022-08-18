@@ -2,10 +2,10 @@ import { StyleSheet, View, SafeAreaView } from 'react-native';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native-paper';
-import { COLORS } from './vocabs';
+import { COLORS } from '../vocabs';
 
-import SisApi from './api';
-import List from './List';
+import SisApi from '../api';
+import List from '../components/List';
 
 /** Home makes api call for all cohort items and loads home page
  * displays loading spinner while waiting for api call

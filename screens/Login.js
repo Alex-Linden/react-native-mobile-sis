@@ -31,7 +31,7 @@ export default function Login({loginUser}) {
   return (
     <SafeAreaView style={styles.container}>
       <Image style={styles.image}
-      source = {require("./assets/rithm-r-black.jpeg")}/>
+      source = {require("../assets/rithm-r-black.jpeg")}/>
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>

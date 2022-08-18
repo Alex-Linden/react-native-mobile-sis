@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image} from 'react-native'
 
-import { COLORS } from './vocabs';
+import { COLORS } from '../vocabs';
 
 function LogoTitle() {
   return (
@@ -11,7 +11,7 @@ function LogoTitle() {
         resizeMode: 'contain',
         height: 35,
       }}
-      source={require('./assets/rithm-school.png')}
+      source={require('../assets/rithm-school.png')}
     />
   );
 }

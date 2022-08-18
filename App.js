@@ -4,12 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from 'react-native-paper';
 
-import Login from './Login';
+import Login from './screens/Login';
 import SisApi from './api';
-import Home from './Home';
-import ItemDetail from './ItemDetail';
+import Home from './screens/Home';
+import ItemDetail from './screens/ItemDetail';
 import { COLORS } from './vocabs';
-import LogoTitle from './LogoTitle';
+import LogoTitle from './components/LogoTitle';
 
 const Stack = createNativeStackNavigator();
 
