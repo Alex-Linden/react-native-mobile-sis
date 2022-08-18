@@ -67,7 +67,11 @@ export default function App() {
       {token
         ? (<Stack.Navigator initialRouteName='Home'>
             <Stack.Screen name='Home' component={Home} />
-            <Stack.Screen name='ItemDetail' component={ItemDetail} />
+            <Stack.Screen 
+              name='ItemDetail' 
+              component={ItemDetail} 
+              options={({ route }) => ({ title: route.params.name })}
+            />
           </Stack.Navigator>)
         : (<Stack.Navigator initialRouteName='Login'>
             <Stack.Screen name='Login'>

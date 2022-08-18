@@ -1,6 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { SafeAreaView, FlatList, View, Text, StyleSheet } from 'react-native';
+import { 
+  SafeAreaView, 
+  FlatList, 
+  View, 
+  Text, 
+  StyleSheet, 
+  Divider, 
+  ItemSeparatorComponent 
+} from 'react-native';
 import { DataTable } from 'react-native-paper';
 // import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 // import 'react-native-tableview';
@@ -58,6 +66,18 @@ export default function List({ cohortItems, navigation }) {
       </View>
     );
   }
+  
+  function itemDivider(){
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#aaa",
+        }}
+      />
+    );
+  }
 
   return (
     <SafeAreaView style={[styles.container]}>
@@ -76,6 +96,7 @@ export default function List({ cohortItems, navigation }) {
           data={cohortItems}
           renderItem={renderItem}
           keyExtractor={item => `${item.id}-${item.type}`}
+          ItemSeparatorComponent={itemDivider}
         />
       </DataTable>
     </SafeAreaView >

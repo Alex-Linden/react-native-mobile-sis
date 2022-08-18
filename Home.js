@@ -16,7 +16,8 @@ export default function Home({ navigation }) {
   /**Calls SisApi to get all cohort items  */
   const fetchCohortItems = async () => {
     console.log("fetchCohortItems");
-    const apiCohortItems = await SisApi.getCohortItems();
+    let apiCohortItems = await SisApi.getCohortItems();
+    apiCohortItems = apiCohortItems.filter(i => i.status === "published");
     setCohortItems(apiCohortItems);
     setIsLoading(false);
   };

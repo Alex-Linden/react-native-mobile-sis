@@ -83,7 +83,10 @@ export default function Card({ session, navigation }) {
         {itemType}
       </DataTable.Cell> */}
       <TouchableHighlight
-        onPress={() => navigation.navigate('ItemDetail')}>
+        onPress={() => navigation.navigate('ItemDetail', {
+          session,
+          name: TYPES[session.type],
+        })}>
         <View>
           <View style={[styles.cardCell]}>
             <Text>{startDate}</Text>

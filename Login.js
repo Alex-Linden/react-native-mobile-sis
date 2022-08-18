@@ -60,8 +60,8 @@ export default function Login({loginUser}) {
         <Text style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity> */}
 
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText} onPress={handleSubmit}>LOGIN</Text>
+      <TouchableOpacity style={styles.loginBtn} onPress={handleSubmit}>
+        <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

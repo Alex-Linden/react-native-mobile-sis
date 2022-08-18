@@ -25,12 +25,7 @@ class SisApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
-  static async getLectureSessions() {
-    let res = await this.request(`lecturesessions/`);
-    return res.company;
-  }
-
+  /** Get all items for Cohort. */
   static async getCohortItems() {
     const apiCohortItems = await axios.get(
       "http://localhost:8000/api/cohortitems/",
@@ -39,6 +34,7 @@ class SisApi {
     return apiCohortItems.data;
   }
 
+  /** Authenticate user and get token. */
   static async logIn({ username, password }) {
     console.log("getToken", username, password);
     const data = {
@@ -59,6 +55,20 @@ class SisApi {
     return this.token;
   }
 
+  /** Get Staff Info */
+  static async getStaffInfo(staffId) {
+    console.log('getStaffInfo API call', staffId);
+    try {
+      const apiStaffInfo = await axios.get(
+        `http://localhost:8000/api/staff/${staffId}/`,
+        { headers: { Authorization: `Token ${this.token}` } }
+      );
+      return apiStaffInfo.data;
+    } catch (err) {
+      console.error('API ERROR', err.response);
+    }
+
+  }
 }
 
 export default SisApi;
