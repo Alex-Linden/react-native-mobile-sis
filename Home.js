@@ -2,24 +2,25 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ActivityIndicator } from 'react-native-paper';
+import { COLORS } from './vocabs';
 
 import SisApi from './api';
 import List from './List';
 
-/** Home
- * 
+/** Home makes api call for all cohort items and loads home page
+ * displays loading spinner while waiting for api call
+ *
  * props:
  * -navigation
- * 
+ *
  * App -> Home -> List
  */
 export default function Home({ navigation }) {
   const [cohortItems, setCohortItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  /**Calls SisApi to get all cohort items  */
+  /**Calls SisApi to get all cohort items and update state  */
   const fetchCohortItems = async () => {
     console.log("fetchCohortItems");
     let apiCohortItems = await SisApi.getCohortItems();
@@ -28,7 +29,7 @@ export default function Home({ navigation }) {
     setIsLoading(false);
   };
 
-  /** Calls SisApi to get all lecture sessions*/
+  /** Calls fetchCohortItems get all cohort items when page loads*/
   useEffect(
     function fetchCohortItemsWhenMounted() {
       fetchCohortItems();
@@ -45,11 +46,11 @@ export default function Home({ navigation }) {
         <ActivityIndicator
           animating={true}
           size={200}
-          color={"rgb(228, 107, 102)"} />
+          color={COLORS.primary} />
       </SafeAreaView>
     );
   }
-  
+
   /** Displays list of cohort items */
   return (
     <View style={styles.container}>
@@ -62,9 +63,7 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 
   loadingContainer: {

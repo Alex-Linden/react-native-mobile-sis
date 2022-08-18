@@ -47,7 +47,6 @@ export default function Item({ session, navigation }) {
         <View style={styles.itemContainer}>
           <View style={[styles.itemCell]}>
             <Text>{startDate}</Text>
-            {/* <Text> {startTime}</Text> */}
           </View>
           <View style={[styles.itemCell]}>
             <Text>{startTime}</Text>
