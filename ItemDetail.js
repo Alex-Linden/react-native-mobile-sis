@@ -102,7 +102,11 @@ export default function ItemDetail({ route, navigation }) {
         <Paragraph style={[styles.cardParagraph]}>{session.description}</Paragraph>
         <View style={styles.staffImages}>
         {staffInfo.map(s =>
-          <Avatar.Image size={70} source={{ uri: s.photo }} style={styles.staffIcon}/>
+          <Avatar.Image
+          size={70}
+          source={{ uri: s.photo }}
+          style={styles.staffIcon}
+          key={s.username}/>
         )}
         </View>
       </Card.Content>
