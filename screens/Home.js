@@ -1,7 +1,7 @@
 import { StyleSheet, View, SafeAreaView } from 'react-native';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, Title } from 'react-native-paper';
 import { COLORS } from '../vocabs';
 
 import SisApi from '../api';
@@ -53,8 +53,8 @@ export default function Home({ navigation }) {
   /** Displays list of cohort items */
   return (
     <View style={styles.container}>
+      <Title>Upcoming</Title>
       <List cohortItems={cohortItems} navigation={navigation} />
-      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }
