@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native-paper';
