@@ -73,8 +73,7 @@ export default function List({ cohortItems, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 10,
-    marginRight: 10,
+    marginHorizontal: 10,
     marginTop: StatusBar.currentHeight || 0,
   },
   listHeader: {

@@ -1,9 +1,11 @@
 import { StyleSheet, View, SafeAreaView } from 'react-native';
 import * as React from 'react';
 import { ActivityIndicator, Title } from 'react-native-paper';
-
-import List from '../components/List';
 import { COLORS } from '../vocabs';
+
+import SisApi from '../api';
+import List from '../components/List';
+import { TYPES } from '../vocabs';
 
 /** Home makes api call for all cohort items and loads home page
  * displays loading spinner while waiting for api call
@@ -22,12 +24,16 @@ import { COLORS } from '../vocabs';
  * week_group
  * }, ...]
  *
+ * params:
+ * - itemType: one of TYPES
+ * 
  * App -> Home -> List
  */
-export default function Home({ navigation, cohortItems }) {
-
-  console.log("cohortItems", cohortItems);
-
+export default function ItemsByType({ navigation, cohortItems }) {
+  const { itemType } = route.params;
+  
+  console.log('ItemsByType', itemType);
+  
   /**Shows loading page while data is being fetched from api */
   if (cohortItems.length === 0) {
     return (
@@ -39,17 +45,17 @@ export default function Home({ navigation, cohortItems }) {
       </SafeAreaView>
     );
   }
-  
+
   const today = new Date();
-  const upcomingItems = cohortItems.filter(i =>
-    new Date(i.start_date) >= today
+  const items = cohortItems.filter(i =>
+    i.type === itemType
   );
 
   /** Displays list of cohort items */
   return (
     <View style={styles.container}>
-      <Title style={styles.title}>Upcoming</Title>
-      <List cohortItems={upcomingItems} navigation={navigation} />
+      <Title style={styles.title}>{TYPES[itemType]}s</Title>
+      <List cohortItems={items} navigation={navigation} />
     </View>
   );
 }

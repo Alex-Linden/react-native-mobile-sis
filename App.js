@@ -7,6 +7,7 @@ import { Button } from 'react-native-paper';
 import Login from './screens/Login';
 import SisApi from './api';
 import Home from './screens/Home';
+import ItemsByType from './screens/ItemsByType';
 import ItemDetail from './screens/ItemDetail';
 import { COLORS } from './vocabs';
 import LogoTitle from './components/LogoTitle';
@@ -21,6 +22,7 @@ const Stack = createNativeStackNavigator();
  */
 export default function App() {
   const [token, setToken] = useState('');
+  const [cohortItems, setCohortItems] = useState([]);
 
   /** Login function makes API call
    *
@@ -35,6 +37,7 @@ export default function App() {
     console.log('loginUser');
     const token = await SisApi.logIn(userData);
     setToken(token);
+    fetchCohortItems();
   }
 
   /** Logout function set token to none */
@@ -42,6 +45,14 @@ export default function App() {
     setToken(null);
     SisApi.token = null;
   }
+  
+  /**Calls SisApi to get all cohort items and update state  */
+  async function fetchCohortItems() {
+    console.log("fetchCohortItems");
+    let apiCohortItems = await SisApi.getCohortItems();
+    apiCohortItems = apiCohortItems.filter(i => i.status === "published");
+    setCohortItems(apiCohortItems);
+  };
 
   /**displays list of cohort items */
   return (
@@ -57,10 +68,12 @@ export default function App() {
             },
             headerRight:() => <Button onPress={logoutUser}>Logout</Button>,
           }} >
-          <Stack.Screen
-            name='Home'
-            component={Home}
-          />
+          <Stack.Screen name='Home'>
+            {(props) => <Home {...props} cohortItems={cohortItems} />}
+          </Stack.Screen>
+          <Stack.Screen name='ItemsByType'>
+            {(props) => <ItemsByType {...props} cohortItems={cohortItems} />}
+          </Stack.Screen>
           <Stack.Screen
             name='ItemDetail'
             component={ItemDetail}
