@@ -1,27 +1,18 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
   SafeAreaView
 } from "react-native";
-import { Card, Title, Content, Paragraph, Avatar } from 'react-native-paper';
+import { Card, Title, Paragraph, Avatar, ActivityIndicator } from 'react-native-paper';
 
 import SisApi from "./api";
+import { TYPES, COLORS } from "./vocabs";
 
-const TYPES = {
-  'L': 'Lecture',
-  'E': 'Exercise',
-  'V': 'Event',
-  'A': 'Assessment',
-};
 
-/**Displays detailed information for one item in a cohort
+/**Displays detailed information for one item in a cohort,
+ * makes api call to get photo for staff
  *
  * props:
  *  cohort item:
@@ -35,9 +26,7 @@ const TYPES = {
  * type,
  * week_group}
  *
- * Card -> ItemDetail
- * 
- * TODO: need to add type
+ * Item -> ItemDetail
  */
 export default function ItemDetail({ route, navigation }) {
   const { session } = route.params;
@@ -45,8 +34,7 @@ export default function ItemDetail({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   console.log('ItemDetail', session);
 
-
-  /**Calls SisApi to get all cohort items  */
+  /**Calls SisApi to get all staff info */
   async function fetchStaffInfo() {
     console.log("fetchStaffInfo");
     const apiStaffInfo = [];
@@ -58,7 +46,7 @@ export default function ItemDetail({ route, navigation }) {
     return apiStaffInfo;
   }
 
-  /** Calls SisApi to get staff info*/
+  /** Calls fetchStaffInfo to get staff info and update state*/
   useEffect(
     function fetchStaffInfoOnMount() {
       async function getStaffInfo(){
@@ -66,7 +54,7 @@ export default function ItemDetail({ route, navigation }) {
         setStaffInfo(apiStaffInfo);
         setIsLoading(false);
       }
-        
+
       getStaffInfo();
     },
     []
@@ -80,6 +68,7 @@ export default function ItemDetail({ route, navigation }) {
         day: "numeric",
       }
     );
+
   const startTime = new Date(session.start_at)
     .toLocaleTimeString([],
       {
@@ -87,28 +76,32 @@ export default function ItemDetail({ route, navigation }) {
         minute: '2-digit',
       }
     );
-  // const itemType = TYPES[session.type];
-  /** Show loading icon on first render */
+
+  const itemType = TYPES[session.type];
+
+  /**Shows loading page while data is being fetched from api */
   if (isLoading) {
     return (
       <SafeAreaView style={styles.loadingContainer}>
-        <Image style={styles.image}
-          source={require("./assets/loading.jpeg")} />
+        <ActivityIndicator
+          animating={true}
+          size={200}
+          color={COLORS.primary} />
       </SafeAreaView>
     );
   }
-  
+
   return (
     <Card>
-      <Card.Title
-        title={session.title}
-        subtitle={`${startDate} ${startTime}`}
-        titleStyle={[styles.cardTitle]}
-      />
+      <Title style={[styles.titleContainer]}>
+        <Text style={[styles.cardTitle]}>{session.title}</Text>
+        <Text style={[styles.cardType]} > ({itemType})</Text>
+      </Title>
+      <Text style={[styles.cardSubtitle]}>{`${startDate} ${startTime}`}</Text>
       <Card.Content>
-        <Paragraph>{session.description}</Paragraph>
+        <Paragraph style={[styles.cardParagraph]}>{session.description}</Paragraph>
         <View style={styles.staffImages}>
-        {staffInfo.map(s => 
+        {staffInfo.map(s =>
           <Avatar.Image size={70} source={{ uri: s.photo }} style={styles.staffIcon}/>
         )}
         </View>
@@ -127,18 +120,27 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontWeight: 'bold',
-    color: '#00449e',
+    color: COLORS.title,
   },
   cardType: {
-    color: '#666',
-    size: '0.875em',
+    color: COLORS.mediumGrey,
+  },
+  cardParagraph: {
+    fontSize: 16,
   },
   staffImages: {
     flexDirection: 'row',
   },
   staffIcon: {
-    // backgroundColor: '#fff',
     margin: 10,
+  },
+  titleContainer:{
+    marginHorizontal: 15
+  },
+  cardSubtitle:{
+    color: COLORS.mediumGrey,
+    marginHorizontal: 15,
+    marginVertical: 6,
   }
-  
+
 });
