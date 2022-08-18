@@ -1,7 +1,6 @@
 import * as React from "react";
 import { StyleSheet, SafeAreaView, Text, View, TouchableHighlight } from 'react-native';
 import { DataTable } from 'react-native-paper';
-// import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 
 const TYPES = {
   'L': 'Lecture',
@@ -10,37 +9,17 @@ const TYPES = {
   'A': 'Assessment',
 };
 
-// TODO: Not using bootstrap right now
-// const
-//   BODY_COLOR = '#000022',
-//   TEXT_PRIMARY = '#882288';
-
-// // custom constants
-// const constants = {
-//   BODY_COLOR, TEXT_PRIMARY,
-// };
-
-// // custom classes
-// const classes = {
-//   title: {
-//     color: 'red',
-//   }
-// };
-//
-// const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
-// const { styles: s, constants: c } = bootstrapStyleSheet;
-
 /** Card
- * 
+ *
  * props:
  * - session like {
  * }
  * - navigation
- * 
+ *
  * List -> Card -> ItemDetail
  */
-export default function Card({ session, navigation }) {
-  
+export default function Item({ session, navigation }) {
+
   const startDate = new Date(session.start_at)
     .toLocaleDateString(undefined,
       {
@@ -57,7 +36,7 @@ export default function Card({ session, navigation }) {
       }
     );
   const itemType = TYPES[session.type];
-      
+
   return (
     <View>
       <TouchableHighlight
@@ -88,22 +67,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 5,
   },
-  
+
   cardCell: {
     flex: 1,
     padding: 10,
   },
-  
+
   cardRight: {
     flex: 2,
     flexDirection: 'column',
   },
-  
+
   cardTitle: {
     fontWeight: 'bold',
     color: '#00449e',
   },
-  
+
   cardType: {
     color: '#666',
     size: '0.875em',
