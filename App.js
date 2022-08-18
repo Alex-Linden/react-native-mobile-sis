@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from 'react-native-paper';
 
 import Login from './Login';
 import SisApi from './api';
@@ -36,6 +37,12 @@ export default function App() {
     setToken(token);
   }
 
+  /** Logout function set token to none */
+  function logoutUser() {
+    setToken(null);
+    SisApi.token = null;
+  }
+
   /**displays list of cohort items */
   return (
     <NavigationContainer>
@@ -48,6 +55,7 @@ export default function App() {
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
+            headerRight:() => <Button onPress={logoutUser}>Logout</Button>,
           }} >
           <Stack.Screen
             name='Home'
