@@ -11,6 +11,15 @@ import {
   SafeAreaView
 } from "react-native";
 
+import { COLORS } from '../vocabs';
+
+/** Login to app - send user info to App, which calls api to get token for user
+ * 
+ * props:
+ * - loginUser function from App
+ * 
+ * App -> Login
+ */
 export default function Login({loginUser}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -108,6 +117,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "rgb(228, 107, 102)",
+    backgroundColor: COLORS.primary,
   },
 });
