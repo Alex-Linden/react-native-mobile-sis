@@ -1,22 +1,23 @@
 import * as React from "react";
-import { StyleSheet, SafeAreaView, Text, View, TouchableHighlight } from 'react-native';
-import { DataTable } from 'react-native-paper';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { COLORS, TYPES } from "./vocabs";
 
-const TYPES = {
-  'L': 'Lecture',
-  'E': 'Exercise',
-  'V': 'Event',
-  'A': 'Assessment',
-};
 
-/** Card
+/** Item displays basic information for an item to be displayed in list
  *
  * props:
- * - session like {
- * }
+ * - session: {description,
+ * id,
+ * staff_terse,
+ * start_at,
+ * start_date,
+ * status,
+ * title,
+ * type,
+ * week_group}
  * - navigation
  *
- * List -> Card -> ItemDetail
+ * List -> Item -> ItemDetail
  */
 export default function Item({ session, navigation }) {
 
@@ -43,17 +44,17 @@ export default function Item({ session, navigation }) {
         onPress={() => navigation.navigate('ItemDetail', {
           session,
         })}>
-        <View style={styles.cardContainer}>
-          <View style={[styles.cardCell]}>
+        <View style={styles.itemContainer}>
+          <View style={[styles.itemCell]}>
             <Text>{startDate}</Text>
             {/* <Text> {startTime}</Text> */}
           </View>
-          <View style={[styles.cardCell]}>
+          <View style={[styles.itemCell]}>
             <Text>{startTime}</Text>
           </View>
-          <View style={[styles.cardRight]}>
-            <Text style={[styles.cardTitle]}>{session.title}</Text>
-            <Text style={[styles.cardType]}>({itemType})</Text>
+          <View style={[styles.itemRight]}>
+            <Text style={[styles.itemTitle]}>{session.title}</Text>
+            <Text style={[styles.itemType]}>({itemType})</Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -62,29 +63,29 @@ export default function Item({ session, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  cardContainer: {
+  itemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: 5,
   },
 
-  cardCell: {
+  itemCell: {
     flex: 1,
     padding: 10,
   },
 
-  cardRight: {
+  itemRight: {
     flex: 2,
     flexDirection: 'column',
   },
 
-  cardTitle: {
+  itemTitle: {
     fontWeight: 'bold',
-    color: '#00449e',
+    color: COLORS.title
   },
 
-  cardType: {
-    color: '#666',
+  itemType: {
+    color: COLORS.lightGrey,
     size: '0.875em',
   }
 });
