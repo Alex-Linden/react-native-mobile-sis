@@ -1,48 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { Component } from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   FlatList,
   View,
   Text,
-  StyleSheet,
-  Divider,
-  ItemSeparatorComponent
+  StyleSheet
 } from 'react-native';
-import { DataTable } from 'react-native-paper';
-// import BootstrapStyleSheet from 'react-native-bootstrap-styles';
-// import 'react-native-tableview';
 
-import Card from "./Card";
+import Item from "./Item";
+import { COLORS } from "./vocabs";
 
-// TODO: Not using bootstrap right now
 
-// const
-//   BODY_COLOR = '#000022',
-//   TEXT_PRIMARY = '#882288';
-
-// // custom constants
-// const constants = {
-//   BODY_COLOR, TEXT_PRIMARY,
-// };
-
-// // custom classes
-// const classes = {
-//   title: {
-//     color: 'red',
-//   }
-// };
-// const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
-// const { styles: s, constants: c } = bootstrapStyleSheet;
-
-/**
- * 
+/** Show list of items for a cohort
+ *
  * props:
- * - cohortItems like [{
+ * - cohortItems [
+ * {description,
+ * id,
+ * staff_terse,
+ * start_at,
+ * start_date,
+ * status,
+ * title,
+ * type,
+ * week_group
  * }, ...]
  * - navigation
- * 
- * Home -> List -> Card
+ *
+ * Home -> List -> Item
  */
 
 export default function List({ cohortItems, navigation }) {
@@ -50,7 +36,7 @@ export default function List({ cohortItems, navigation }) {
   function renderItem({ item }) {
     return (
       <View >
-        <Card style={[styles.card]} session={item} navigation={navigation} />
+        <Item style={[styles.item]} session={item} navigation={navigation} />
       </View>
     );
   }
@@ -58,11 +44,7 @@ export default function List({ cohortItems, navigation }) {
   function itemDivider() {
     return (
       <View
-        style={{
-          height: 1,
-          width: "100%",
-          backgroundColor: "#aaa",
-        }}
+        style={[styles.itemDivider]}
       />
     );
   }
@@ -76,11 +58,7 @@ export default function List({ cohortItems, navigation }) {
         <Text style={[styles.listCellTitle]}>Title</Text>
       </View>
       <View
-        style={{
-          height: 1,
-          width: "100%",
-          backgroundColor: "#444",
-        }}
+        style={[styles.tableDivider]}
       />
       <FlatList
         data={cohortItems}
@@ -115,10 +93,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
   },
-  card: {
+  item: {
     backgroundColor: '#f9c2ff',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+  },
+  itemDivider: {
+    height: 1,
+    width: "100%",
+    backgroundColor: COLORS.lightGrey
+  },
+  tableDivider: {
+    height: 1,
+    width: "100%",
+    backgroundColor: COLORS.darkGrey
   }
 });
