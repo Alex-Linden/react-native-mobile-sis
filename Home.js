@@ -8,7 +8,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SisApi from './api';
 import List from './List';
 
-
+/** Home
+ * 
+ * props:
+ * -navigation
+ * 
+ * App -> Home -> List
+ */
 export default function Home({ navigation }) {
   const [cohortItems, setCohortItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,20 +38,23 @@ export default function Home({ navigation }) {
 
   console.log("cohortItems", cohortItems);
 
-  /**Shows loading image while data is being fetched from api */
+  /**Shows loading page while data is being fetched from api */
   if (isLoading) {
     return (
       <SafeAreaView style={styles.loadingContainer}>
-        <Image style={styles.image}
-          source={require("./assets/loading.jpeg")} />
+        <ActivityIndicator
+          animating={true}
+          size={200}
+          color={"rgb(228, 107, 102)"} />
       </SafeAreaView>
     );
   }
-  /**displays list of cohort items */
+  
+  /** Displays list of cohort items */
   return (
     <View style={styles.container}>
       <List cohortItems={cohortItems} navigation={navigation} />
-      <StatusBar style="auto" />
+      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }
@@ -54,15 +63,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  loginContainer: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 
   loadingContainer: {

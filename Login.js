@@ -83,11 +83,10 @@ const styles = StyleSheet.create({
 
   inputView: {
     backgroundColor: "#FFC0CB",
-    borderRadius: 30,
-    width: "70%",
+    borderRadius: 20,
+    width: "60%",
     height: 45,
     marginBottom: 20,
-
     alignItems: "center",
   },
 
@@ -95,7 +94,6 @@ const styles = StyleSheet.create({
     height: 50,
     flex: 1,
     padding: 10,
-    marginLeft: 20,
   },
 
   forgot_button: {
@@ -104,9 +102,9 @@ const styles = StyleSheet.create({
   },
 
   loginBtn: {
-    width: "40%",
-    borderRadius: 25,
-    height: 50,
+    width: "30%",
+    borderRadius: 15,
+    height: 40,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,

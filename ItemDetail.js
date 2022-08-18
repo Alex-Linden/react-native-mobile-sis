@@ -14,6 +14,13 @@ import { Card, Title, Content, Paragraph, Avatar } from 'react-native-paper';
 
 import SisApi from "./api";
 
+const TYPES = {
+  'L': 'Lecture',
+  'E': 'Exercise',
+  'V': 'Event',
+  'A': 'Assessment',
+};
+
 /**Displays detailed information for one item in a cohort
  *
  * props:
@@ -29,6 +36,8 @@ import SisApi from "./api";
  * week_group}
  *
  * Card -> ItemDetail
+ * 
+ * TODO: need to add type
  */
 export default function ItemDetail({ route, navigation }) {
   const { session } = route.params;
@@ -74,7 +83,7 @@ export default function ItemDetail({ route, navigation }) {
   const startTime = new Date(session.start_at)
     .toLocaleTimeString([],
       {
-        hour: '2-digit',
+        hour: 'numeric',
         minute: '2-digit',
       }
     );

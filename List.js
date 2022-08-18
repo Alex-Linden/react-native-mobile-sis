@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { 
-  SafeAreaView, 
-  FlatList, 
-  View, 
-  Text, 
-  StyleSheet, 
-  Divider, 
-  ItemSeparatorComponent 
+import {
+  SafeAreaView,
+  FlatList,
+  View,
+  Text,
+  StyleSheet,
+  Divider,
+  ItemSeparatorComponent
 } from 'react-native';
 import { DataTable } from 'react-native-paper';
 // import BootstrapStyleSheet from 'react-native-bootstrap-styles';
@@ -32,30 +32,18 @@ import Card from "./Card";
 //     color: 'red',
 //   }
 // };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  listHeader: {
-    flexDirection: 'row',
-    padding: 10,
-  },
-  listCell: {
-    padding: 10,
-  },
-  card: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  }
-});
-
-// TODO: Not using bootstrap right now
 // const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
 // const { styles: s, constants: c } = bootstrapStyleSheet;
+
+/**
+ * 
+ * props:
+ * - cohortItems like [{
+ * }, ...]
+ * - navigation
+ * 
+ * Home -> List -> Card
+ */
 
 export default function List({ cohortItems, navigation }) {
 
@@ -66,8 +54,8 @@ export default function List({ cohortItems, navigation }) {
       </View>
     );
   }
-  
-  function itemDivider(){
+
+  function itemDivider() {
     return (
       <View
         style={{
@@ -81,56 +69,56 @@ export default function List({ cohortItems, navigation }) {
 
   return (
     <SafeAreaView style={[styles.container]}>
-      <DataTable>
-        {/* <DataTable.Header style={[styles.listHeader]}>
-          <DataTable.Title style={[styles.listCell]}>Date</DataTable.Title>
-          <DataTable.Title style={[styles.listCell]}>Start Time</DataTable.Title>
-          <DataTable.Title style={[styles.listCell]}>Title</DataTable.Title>
-        </DataTable.Header> */}
-        <DataTable.Header>
-          <DataTable.Title>Date</DataTable.Title>
-          <DataTable.Title>Start Time</DataTable.Title>
-          <DataTable.Title>Title</DataTable.Title>
-        </DataTable.Header>
-        <FlatList
-          data={cohortItems}
-          renderItem={renderItem}
-          keyExtractor={item => `${item.id}-${item.type}`}
-          ItemSeparatorComponent={itemDivider}
-        />
-      </DataTable>
+
+      <View style={[styles.listHeader]}>
+        <Text style={[styles.listCell]}>Date</Text>
+        <Text style={[styles.listCell]}>Start Time</Text>
+        <Text style={[styles.listCellTitle]}>Title</Text>
+      </View>
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#444",
+        }}
+      />
+      <FlatList
+        data={cohortItems}
+        renderItem={renderItem}
+        keyExtractor={item => `${item.id}-${item.type}`}
+        ItemSeparatorComponent={itemDivider}
+      />
+
     </SafeAreaView >
-
-
-    // <View style={[s.body]}>
-    //   <View style={[s.table]}>
-    //     <View style={[s.thead]}>
-    //       <View style={[s.tr]}>
-    //         <View style={[s.th]}>
-    //           <Text>Date</Text>
-    //         </View>
-    //         <View style={[s.th]}>
-    //           <Text>Start Time</Text>
-    //         </View>
-    //         <View style={[s.th]}>
-    //           <Text>Title</Text>
-    //         </View>
-    //       </View>
-    //     </View>
-    //     <View style={[s.tbody]}>
-    //       <Card />
-    //     </View>
-    //   </View>
-    // </View>
-
-
-    // <View style={[s.body]}>
-    //           <Text>Date</Text>
-    //           <Text>Start Time</Text>
-    //           <Text>Title</Text>
-    //     <View style={[s.tbody]}>
-    //       <Card />
-    //     </View>
-    // </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  listHeader: {
+    flexDirection: 'row',
+    paddingVertical: 5,
+  },
+  listCell: {
+    flex: 1,
+    padding: 10,
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  listCellTitle: {
+    flex: 2,
+    padding: 10,
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  card: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  }
+});

@@ -12,18 +12,21 @@ import ItemDetail from './ItemDetail';
 
 const Stack = createNativeStackNavigator();
 
+function LogoTitle() {
+  return (
+    <Image
+      style={{ 
+        backgroundColor: "rgb(228, 107, 102)", 
+        resizeMode: 'contain', 
+        height: 35,
+      }}
+      source={require('./assets/rithm-school.png')}
+    />
+  );
+}
+
 export default function App() {
-  // const [cohortItems, setCohortItems] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState('');
-
-
-  // const fetchCohortItems = async () => {
-  //   console.log("fetchCohortItems");
-  //   const apiCohortItems = await SisApi.getCohortItems();
-  //   setCohortItems(apiCohortItems);
-  //   setIsLoading(false);
-  // };
 
   /** Login function makes API call
    *
@@ -40,40 +43,35 @@ export default function App() {
     setToken(token);
   }
 
-  // /** Calls SisApi to get all lecture sessions*/
-  // useEffect(
-  //   function fetchCohortItemsWhenMounted() {
-  //     if (token) fetchCohortItems();
-  //   },
-  //   [token]
-  // );
-
-  // console.log("cohortItems", cohortItems);
-
-  // /** Load login page if not logged in */
-  // if (!token) {
-  //   return (
-  //     <NavigationContainer>
-  //       <View style={styles.loginContainer}>
-  //         <Login loginUser={loginUser} />
-  //       </View>
-  //     </NavigationContainer>
-  //   );
-  // }
-
   /**displays list of cohort items */
   return (
     <NavigationContainer>
       {token
-        ? (<Stack.Navigator initialRouteName='Home'>
-            <Stack.Screen name='Home' component={Home} />
+        ? (<Stack.Navigator 
+              initialRouteName='Home'
+              screenOptions={{
+                headerTitle: (props) => <LogoTitle {...props} />,
+                headerStyle: {
+                  backgroundColor: "rgb(228, 107, 102)",
+                },
+              }} >
+            <Stack.Screen 
+              name='Home' 
+              component={Home}
+            />
             <Stack.Screen 
               name='ItemDetail' 
-              component={ItemDetail} 
-              options={({ route }) => ({ title: route.params.name })}
+              component={ItemDetail}
             />
           </Stack.Navigator>)
-        : (<Stack.Navigator initialRouteName='Login'>
+        : (<Stack.Navigator 
+            initialRouteName='Login'
+            screenOptions={{
+              headerTitle: (props) => <LogoTitle {...props} />,
+              headerStyle: {
+                backgroundColor: "rgb(228, 107, 102)",
+              },
+            }} >
             <Stack.Screen name='Login'>
               {(props) => <Login {...props} loginUser={loginUser} />}
             </Stack.Screen>
