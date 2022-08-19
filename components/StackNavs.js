@@ -23,7 +23,7 @@ const EventsStack = createNativeStackNavigator();
 function HomeStackScreen({ cohortItems, logoutUser }) {
   return (
     <HomeStack.Navigator
-      initialRouteName='Home'
+      initialRouteName='HomeS'
       screenOptions={{
         headerTitle: (props) => <LogoTitle {...props} />,
         headerTintColor: '#ffffff',
@@ -33,8 +33,9 @@ function HomeStackScreen({ cohortItems, logoutUser }) {
         headerRight: () => <TouchableOpacity onPress={logoutUser}>
           <Ionicons name={'log-out-outline'} size={25} color={'#fff'} />
         </TouchableOpacity>,
+        headerBackTitleVisible: false
       }} >
-      <HomeStack.Screen name='Home'>
+      <HomeStack.Screen name='HomeS'>
         {(props) => <Home {...props} cohortItems={cohortItems} />}
       </HomeStack.Screen>
       <HomeStack.Screen
@@ -62,6 +63,7 @@ function LecturesStackScreen({ cohortItems, logoutUser }) {
         headerRight: () => <TouchableOpacity onPress={logoutUser}>
           <Ionicons name={'log-out-outline'} size={25} color={'#fff'} />
         </TouchableOpacity>,
+        headerBackTitleVisible: false
       }} >
       <LecturesStack.Screen name='LecturesS'>
         {(props) => <ItemsByType {...props}
@@ -93,6 +95,7 @@ function ExercisesStackScreen({ cohortItems, logoutUser }) {
         headerRight: () => <TouchableOpacity onPress={logoutUser}>
           <Ionicons name={'log-out-outline'} size={25} color={'#fff'} />
         </TouchableOpacity>,
+        headerBackTitleVisible: false
       }} >
       <ExercisesStack.Screen name='ExercisesS'>
         {(props) => <ItemsByType {...props}
@@ -124,6 +127,7 @@ function AssessmentsStackScreen({ cohortItems, logoutUser }) {
         headerRight: () => <TouchableOpacity onPress={logoutUser}>
           <Ionicons name={'log-out-outline'} size={25} color={'#fff'} />
         </TouchableOpacity>,
+        headerBackTitleVisible: false
       }} >
       <AssessmentsStack.Screen name='AssessmentsS'>
         {(props) => <ItemsByType {...props}
@@ -155,6 +159,7 @@ function EventsStackScreen({ cohortItems, logoutUser }) {
         headerRight: () => <TouchableOpacity onPress={logoutUser}>
           <Ionicons name={'log-out-outline'} size={25} color={'#fff'} />
         </TouchableOpacity>,
+        headerBackTitleVisible: false
       }} >
       <EventsStack.Screen name='EventsS'>
         {(props) => <ItemsByType {...props}
