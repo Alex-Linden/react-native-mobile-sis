@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from 'react-native-paper';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Login from './screens/Login';
 import SisApi from './api';
@@ -86,14 +87,34 @@ export default function App() {
       {token
         ? (<Tab.Navigator
           initialRouteName='Home'
-          screenOptions={{
+          screenOptions={ ({route}) => ({
             headerTitle: (props) => <LogoTitle {...props} />,
             headerTintColor: '#ffffff',
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
+            tabBarActiveTintColor: COLORS.primary,
+            tabBarInactiveTintColor: COLORS.mediumGrey,
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+  
+              if (route.name === 'Home') {
+                iconName = 'home-outline';
+              } else if (route.name === 'Lectures') {
+                iconName = 'megaphone-outline';
+              } else if (route.name === 'Exercises') {
+                iconName = 'barbell-outline';
+              } else if (route.name === 'Assessments') {
+                iconName = 'newspaper-outline';
+              } else if (route.name === 'Events') {
+                iconName = 'calendar-outline';
+              }
+  
+              // You can return any component that you like here!
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
             headerRight: () => <Button onPress={logoutUser}>Logout</Button>,
-          }} >
+          })} >
           <Tab.Screen name='Home' options={{ headerShown: false }}>
             {(props) => <StackNav {...props} cohortItems={cohortItems} logoutUser={logoutUser} />}
           </Tab.Screen>
