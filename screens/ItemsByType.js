@@ -29,8 +29,8 @@ import { TYPES } from '../vocabs';
  * 
  * App -> Home -> List
  */
-export default function ItemsByType({ navigation, cohortItems }) {
-  const { itemType } = route.params;
+export default function ItemsByType({ navigation, cohortItems, itemType }) {
+  // const { itemType } = route.params;
   
   console.log('ItemsByType', itemType);
   

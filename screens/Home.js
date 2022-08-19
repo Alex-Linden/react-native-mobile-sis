@@ -4,6 +4,9 @@ import { ActivityIndicator, Title } from 'react-native-paper';
 
 import List from '../components/List';
 import { COLORS } from '../vocabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 /** Home makes api call for all cohort items and loads home page
  * displays loading spinner while waiting for api call
@@ -47,6 +50,7 @@ export default function Home({ navigation, cohortItems }) {
 
   /** Displays list of cohort items */
   return (
+    
     <View style={styles.container}>
       <Title style={styles.title}>Upcoming</Title>
       <List cohortItems={upcomingItems} navigation={navigation} />
