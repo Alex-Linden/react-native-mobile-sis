@@ -23,7 +23,7 @@ const EventsStack = createNativeStackNavigator();
 function HomeStackScreen({ cohortItems, logoutUser }) {
   return (
     <HomeStack.Navigator
-      initialRouteName='HomeS'
+      initialRouteName='Home'
       screenOptions={{
         headerTitle: (props) => <LogoTitle {...props} />,
         headerTintColor: '#ffffff',
@@ -34,7 +34,7 @@ function HomeStackScreen({ cohortItems, logoutUser }) {
           <Ionicons name={'log-out-outline'} size={25} color={'#fff'} />
         </TouchableOpacity>,
       }} >
-      <HomeStack.Screen name='HomeS'>
+      <HomeStack.Screen name='Home'>
         {(props) => <Home {...props} cohortItems={cohortItems} />}
       </HomeStack.Screen>
       <HomeStack.Screen
