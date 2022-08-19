@@ -101,15 +101,15 @@ export default function App() {
               let iconName;
 
               if (route.name === 'Home') {
-                iconName = 'home-outline';
+                iconName = focused ? 'home' : 'home-outline';
               } else if (route.name === 'Lectures') {
-                iconName = 'megaphone-outline';
+                iconName = focused ? 'megaphone' : 'megaphone-outline';
               } else if (route.name === 'Exercises') {
-                iconName = 'barbell-outline';
+                iconName = focused ? 'barbell' : 'barbell-outline';
               } else if (route.name === 'Assessments') {
-                iconName = 'newspaper-outline';
+                iconName = focused ? 'newspaper' : 'newspaper-outline';
               } else if (route.name === 'Events') {
-                iconName = 'calendar-outline';
+                iconName = focused ? 'calendar' : 'calendar-outline';
               }
 
               // You can return any component that you like here!
