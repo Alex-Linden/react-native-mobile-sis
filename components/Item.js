@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { COLORS, TYPES } from "../vocabs";
 
 
@@ -40,7 +40,7 @@ export default function Item({ session, navigation }) {
 
   return (
     <View>
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={() => navigation.navigate('ItemDetail', {
           session,
         })}>
@@ -56,7 +56,7 @@ export default function Item({ session, navigation }) {
             <Text style={[styles.itemType]}>({itemType})</Text>
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   );
 }
