@@ -2,8 +2,10 @@ import * as React from 'react';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from 'react-native-paper';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { Button, DefaultTheme } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 import Login from './screens/Login';
 import SisApi from './api';
@@ -12,34 +14,34 @@ import ItemsByType from './screens/ItemsByType';
 import ItemDetail from './screens/ItemDetail';
 import { COLORS } from './vocabs';
 import LogoTitle from './components/LogoTitle';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import StackNav from './components/StackNav';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-function StackNav({ cohortItems, logoutUser }) {
-  return (
-    <Stack.Navigator
-      initialRouteName='Home'
-      screenOptions={{
-        headerTitle: (props) => <LogoTitle {...props} />,
-        headerTintColor: '#ffffff',
-        headerStyle: {
-          backgroundColor: COLORS.primary,
-        },
-        headerRight: () => <Button onPress={logoutUser}>Logout</Button>,
-      }} >
-      <Stack.Screen name='Home'>
-        {(props) => <Home {...props} cohortItems={cohortItems} />}
-      </Stack.Screen>
-      <Stack.Screen
-        name='ItemDetail'
-        component={ItemDetail}
-      />
-    </Stack.Navigator>
-  );
-}
+// function StackNav({ cohortItems, logoutUser }) {
+//   return (
+//     <Stack.Navigator
+//       initialRouteName='Home'
+//       screenOptions={{
+//         headerTitle: (props) => <LogoTitle {...props} />,
+//         headerTintColor: '#ffffff',
+//         headerStyle: {
+//           backgroundColor: COLORS.primary,
+//         },
+//         headerRight: () => <Button onPress={logoutUser}>Logout</Button>,
+//       }} >
+//       <Stack.Screen name='Home'>
+//         {(props) => <Home {...props} cohortItems={cohortItems} />}
+//       </Stack.Screen>
+//       <Stack.Screen
+//         name='ItemDetail'
+//         component={ItemDetail}
+//       />
+//     </Stack.Navigator>
+//   );
+// }
 
 /**SIS application
  *
@@ -87,7 +89,7 @@ export default function App() {
       {token
         ? (<Tab.Navigator
           initialRouteName='Home'
-          screenOptions={ ({route}) => ({
+          screenOptions={({ route }) => ({
             headerTitle: (props) => <LogoTitle {...props} />,
             headerTintColor: '#ffffff',
             headerStyle: {
@@ -97,7 +99,7 @@ export default function App() {
             tabBarInactiveTintColor: COLORS.mediumGrey,
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
-  
+
               if (route.name === 'Home') {
                 iconName = 'home-outline';
               } else if (route.name === 'Lectures') {
@@ -109,26 +111,39 @@ export default function App() {
               } else if (route.name === 'Events') {
                 iconName = 'calendar-outline';
               }
-  
+
               // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            headerRight: () => <Button onPress={logoutUser}>Logout</Button>,
+            headerRight: () => <TouchableOpacity onPress={logoutUser}>
+              <Text style={styles.forgot_button}>Logout</Text>
+            </TouchableOpacity>
+            // <Button onPress={logoutUser} >Logout</Button>,
           })} >
           <Tab.Screen name='Home' options={{ headerShown: false }}>
-            {(props) => <StackNav {...props} cohortItems={cohortItems} logoutUser={logoutUser} />}
+            {(props) => <StackNav {...props}
+              cohortItems={cohortItems}
+              logoutUser={logoutUser} />}
           </Tab.Screen>
           <Tab.Screen name='Lectures'>
-            {(props) => <ItemsByType {...props} cohortItems={cohortItems} itemType='L' />}
+            {(props) => <ItemsByType {...props}
+              cohortItems={cohortItems}
+              itemType='L' />}
           </Tab.Screen>
           <Tab.Screen name='Exercises'>
-            {(props) => <ItemsByType {...props} cohortItems={cohortItems} itemType='E' />}
+            {(props) => <ItemsByType {...props}
+              cohortItems={cohortItems}
+              itemType='E' />}
           </Tab.Screen>
           <Tab.Screen name='Assessments'>
-            {(props) => <ItemsByType {...props} cohortItems={cohortItems} itemType='A' />}
+            {(props) => <ItemsByType {...props}
+              cohortItems={cohortItems}
+              itemType='A' />}
           </Tab.Screen>
           <Tab.Screen name='Events'>
-            {(props) => <ItemsByType {...props} cohortItems={cohortItems} itemType='V' />}
+            {(props) => <ItemsByType {...props}
+              cohortItems={cohortItems}
+              itemType='V' />}
           </Tab.Screen>
         </Tab.Navigator>
         )
@@ -151,3 +166,14 @@ export default function App() {
   );
 }
 
+const styles = StyleSheet.create({
+  forgot_button: {
+    height: 30,
+    justifyContent: 'center',
+    alignContent:'center',
+    marginRight: 8,
+    fontSize: 20,
+    color: '#ffffff'
+  },
+
+});
