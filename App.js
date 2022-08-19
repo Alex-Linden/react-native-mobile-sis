@@ -3,53 +3,39 @@ import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import { Button, DefaultTheme } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 import Login from './screens/Login';
 import SisApi from './api';
-import Home from './screens/Home';
-import ItemsByType from './screens/ItemsByType';
-import ItemDetail from './screens/ItemDetail';
 import { COLORS } from './vocabs';
 import LogoTitle from './components/LogoTitle';
-import StackNav from './components/StackNav';
+import { 
+  HomeStackScreen, 
+  LecturesStackScreen, 
+  ExercisesStackScreen, 
+  AssessmentsStackScreen, 
+  EventsStackScreen 
+} from './components/StackNav';
 
-const Stack = createNativeStackNavigator();
+const LoginStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-
-// function StackNav({ cohortItems, logoutUser }) {
-//   return (
-//     <Stack.Navigator
-//       initialRouteName='Home'
-//       screenOptions={{
-//         headerTitle: (props) => <LogoTitle {...props} />,
-//         headerTintColor: '#ffffff',
-//         headerStyle: {
-//           backgroundColor: COLORS.primary,
-//         },
-//         headerRight: () => <Button onPress={logoutUser}>Logout</Button>,
-//       }} >
-//       <Stack.Screen name='Home'>
-//         {(props) => <Home {...props} cohortItems={cohortItems} />}
-//       </Stack.Screen>
-//       <Stack.Screen
-//         name='ItemDetail'
-//         component={ItemDetail}
-//       />
-//     </Stack.Navigator>
-//   );
-// }
 
 /**SIS application
  *
  * state: token
  *
- * App -> {Login, Home}
+ * App -> {
+ *  Login, 
+ *  HomeStackScreen, 
+ *  LecturesStackScreen, 
+ *  ExercisesStackScreen, 
+ *  AssessmentsStackScreen, 
+ *  EventsStackScreen 
+ * }
  */
-export default function App() {
+export default function () {
   const [token, setToken] = useState('');
   const [cohortItems, setCohortItems] = useState([]);
 
@@ -88,13 +74,7 @@ export default function App() {
     <NavigationContainer>
       {token
         ? (<Tab.Navigator
-          initialRouteName='Home'
           screenOptions={({ route }) => ({
-            headerTitle: (props) => <LogoTitle {...props} />,
-            headerTintColor: '#ffffff',
-            headerStyle: {
-              backgroundColor: COLORS.primary,
-            },
             tabBarActiveTintColor: COLORS.primary,
             tabBarInactiveTintColor: COLORS.mediumGrey,
             tabBarIcon: ({ focused, color, size }) => {
@@ -112,42 +92,42 @@ export default function App() {
                 iconName = focused ? 'calendar' : 'calendar-outline';
               }
 
-              // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            headerRight: () => <TouchableOpacity onPress={logoutUser}>
-              <Text style={styles.forgot_button}>Logout</Text>
-            </TouchableOpacity>
-            // <Button onPress={logoutUser} >Logout</Button>,
+            headerShown: false,
           })} >
           <Tab.Screen name='Home' options={{ headerShown: false }}>
-            {(props) => <StackNav {...props}
+            {(props) => <HomeStackScreen {...props}
               cohortItems={cohortItems}
               logoutUser={logoutUser} />}
           </Tab.Screen>
           <Tab.Screen name='Lectures'>
-            {(props) => <ItemsByType {...props}
+          {(props) => <LecturesStackScreen {...props}
               cohortItems={cohortItems}
-              itemType='L' />}
+              logoutUser={logoutUser}
+              />}
           </Tab.Screen>
           <Tab.Screen name='Exercises'>
-            {(props) => <ItemsByType {...props}
+          {(props) => <ExercisesStackScreen {...props}
               cohortItems={cohortItems}
-              itemType='E' />}
+              logoutUser={logoutUser}
+              />}
           </Tab.Screen>
           <Tab.Screen name='Assessments'>
-            {(props) => <ItemsByType {...props}
+          {(props) => <AssessmentsStackScreen {...props}
               cohortItems={cohortItems}
-              itemType='A' />}
+              logoutUser={logoutUser}
+              />}
           </Tab.Screen>
           <Tab.Screen name='Events'>
-            {(props) => <ItemsByType {...props}
+          {(props) => <EventsStackScreen {...props}
               cohortItems={cohortItems}
-              itemType='V' />}
+              logoutUser={logoutUser}
+              />}
           </Tab.Screen>
         </Tab.Navigator>
         )
-        : (<Tab.Navigator
+        : (<LoginStack.Navigator
           initialRouteName='Login'
           screenOptions={{
             headerTitle: (props) => <LogoTitle {...props} />,
@@ -156,10 +136,10 @@ export default function App() {
               backgroundColor: COLORS.primary,
             },
           }} >
-          <Tab.Screen name='Login'>
+          <LoginStack.Screen name='Login'>
             {(props) => <Login {...props} loginUser={loginUser} />}
-          </Tab.Screen>
-        </Tab.Navigator>
+          </LoginStack.Screen>
+        </LoginStack.Navigator>
         )
       }
     </NavigationContainer >
