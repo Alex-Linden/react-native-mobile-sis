@@ -12,7 +12,6 @@ Homepage displays upcoming items for cohort. Items include lectures, exercises, 
 
 User can use tab navigation to display only lectures, exercises, assessments and events.
 User can click on an item in a list to view additional information abbout the item.
-![simulator_screenshot_E0D4EE63-CA8D-4D7F-90E8-CA1D6A7910EF](https://user-images.githubusercontent.com/728518/186285880-2c7bf028-8825-4707-9b8d-07375ed5910d.png)
 <br /><img src="https://user-images.githubusercontent.com/728518/186285880-2c7bf028-8825-4707-9b8d-07375ed5910d.png" width="300" />
 
 User can logout using logout button at top right.
